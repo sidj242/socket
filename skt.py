@@ -30,16 +30,22 @@ def get_new_value(msg):
     data2 = data.decode("UTF-8")
     position_case = data2.find('bat')
 
-    cases = data2[position_case + 5:position_case + 6]
+    cases = int(float(data2[position_case + 5:position_case + 6]))
     position_Ah1 = data2.find('Ah1')
     position_Ah2 = data2.find('Ah2')
     if position_Ah1 < 0:
         Ah1 = 0.0
         Ah2 = 0.0
     else:
-        Ah1 = float(data2[position_Ah1 + 5:position_Ah1 + 11])
-        Ah2 = float(data2[position_Ah2 + 5:position_Ah2 + 11])
-    emit('after connect', {'data': {'per1': 20, 'per2': 40, 'case': 3}}, broadcast=True)
+        Ah1 = float(((data2[position_Ah1 + 5:position_Ah1 + 11])/20)*100)
+        Ah2 = float(((data2[position_Ah2 + 5:position_Ah2 + 11])/20)*100)
+    cases_map = {
+        1: 1,
+        2: 1,
+        3: 3,
+        4: 3
+    }
+    emit('after connect', {'data': {'per1': Ah1, 'per2': Ah2, 'case': cases_map.get(cases)}}, broadcast=True)
 
 
 if __name__ == '__main__':
