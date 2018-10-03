@@ -30,7 +30,7 @@ def get_new_value(msg):
     data2 = data.decode("UTF-8")
     position_case = data2.find('bat')
 
-    cases = int(data2[position_case + 5:position_case + 6])
+    cases = data2[position_case + 5:position_case + 6]
     position_Ah1 = data2.find('Ah1')
     position_Ah2 = data2.find('Ah2')
     if position_Ah1 < 0:
