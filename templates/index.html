@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <title>Synchronized Slider</title>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+      <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+      <script type="text/javascript">
+         $(document).ready(function() {
+
+            function hideAllCases(parameters){
+                $(".case1").hide();
+                $(".case2").hide();
+                $(".case3").hide();
+            }
+            hideAllCases();
+           // sending a connect request to the server.
+           var socket = io.connect('http://localhost:5000');
+
+           socket.on('after connect', function(msg) {
+                if (msg.data.case === 1) {
+                    hideAllCases();
+                    $(".case1").show();
+                 } else if (msg.data.case === 2) {
+                    hideAllCases();
+                     $(".case2").show();
+                 } else if (msg.data.case === 3) {
+                    hideAllCases();
+                     $(".case3").show();
+                 }
+               console.log('After connect', msg);
+           });
+
+           socket.on('update value', function(msg) {
+               console.log('Slider value updated');
+               $('#' + msg.who).val(msg.data);
+           });
+         });
+      </script>
+       <style>
+        .rectangle {
+          height: 47px;
+          width: 9px;
+          background-color: green;
+          block: inline;
+        }
+    </style>
+   </head>
+   <body style="background-image: url('../static/bg.png'); background-repeat:no-repeat;background-size:cover;">
+       <div style="position: absolute; top: 200px; left: 300px;">
+           <img src="../static/battery.png" style="width: 120px"/>
+       </div>
+       <div style="position: absolute; top: 300px; left: 300px;">
+           <img src="../static/battery.png" style="width: 120px"/>
+       </div>
+       <div class="#silo_up" >
+           <div class="rectangle"  style="position: absolute; top: 208px; left: 400px;"></div>
+           <div class="rectangle"  style="position: absolute; top: 208px; left: 386px;"></div>
+           <div class="rectangle"  style="position: absolute; top: 208px; left: 372px;"></div>
+           <div class="rectangle"  style="position: absolute; top: 208px; left: 358px;"></div>
+           <div class="rectangle"  style="position: absolute; top: 208px; left: 344px;"></div>
+           <div class="rectangle"  style="position: absolute; top: 208px; left: 330px;"></div>
+       </div>
+
+       <div class="#silo_down_red">
+           <img src="../static/red.png" style="
+                position: absolute;
+                top: 309px;
+                left: 401px;
+                width: 9px;"/>
+       </div>
+
+       <div class="case1">
+           <img src="../static/case1_1.png" style="position: absolute; width: 60px; top: 216px; left: 423px;"/>
+           <img src="../static/case1.png" style="position: absolute; width: 325px; top: 200px; left: 353px;"/>
+       </div>
+       <div class="case2">
+           <img src="../static/case1_1.png" style="position: absolute; width: 60px; top: 216px; left: 423px;"/>
+      </div>
+      <div class="case3">
+          <img src="../static/case3_1.png" style="position: absolute; width: 60px;top: 315px;left: 423px;"/>
+          <img src="../static/case3.png" style="position: absolute; width: 325px;top: 138px;left: 353px;"/>
+      </div>
+   </body>
+</html>
