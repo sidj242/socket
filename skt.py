@@ -44,8 +44,8 @@ def get_new_value(msg):
         Ah2 = 0.0
     else:
         try:
-            Ah1 = float(((data2[position_Ah1 + 5:position_Ah1 + 10])/20)*100)
-            Ah2 = float(((data2[position_Ah2 + 5:position_Ah2 + 10])/20)*100)
+            Ah1 = float((float(data2[position_Ah1 + 5:position_Ah1 + 10])/20)*100)
+            Ah2 = float((float(data2[position_Ah2 + 5:position_Ah2 + 10])/20)*100)
         except:
             Ah1 = 0.0
             Ah2 = 0.0
