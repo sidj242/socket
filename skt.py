@@ -7,9 +7,12 @@ app = Flask(__name__)
 socketio = SocketIO(app)
 
 try:
-    ser = serial.Serial("/dev/ttyACM0", 9600, timeout=3)  # change ACM number as found from ls /dev/tty/ACM*
+    try:
+        ser = serial.Serial("/dev/ttyACM0", 9600, timeout=3)  # change ACM number as found from ls /dev/tty/ACM*
+    except:
+        ser = serial.Serial("/dev/ttyACM1", 9600, timeout=3)  # change ACM number as found from ls /dev/tty/ACM*
 except:
-    ser = serial.Serial("/dev/ttyACM1", 9600, timeout=3)  # change ACM number as found from ls /dev/tty/ACM*
+    ser = serial.Serial("/dev/ttyACM2", 9600, timeout=3)
 
 ser.baudrate = 9600
 
