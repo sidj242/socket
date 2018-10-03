@@ -34,7 +34,7 @@ def get_new_value(msg):
     position_case = data2.find('bat')
 
     cases = int(data2[position_case + 5:position_case + 6])
-    print(cases)
+
     position_Ah1 = data2.find('Ah1')
     position_Ah2 = data2.find('Ah2')
     if position_Ah1 < 0:
@@ -53,6 +53,7 @@ def get_new_value(msg):
         3: 3,
         4: 3
     }
+    print(cases, Ah1, Ah2)
     emit('after connect', {'data': {'per1': Ah1, 'per2': Ah2, 'case': cases_map.get(cases)}}, broadcast=True)
 
 
