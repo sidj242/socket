@@ -15,7 +15,7 @@ ser.baudrate = 9600
 
 @app.route('/')
 def index():
-    return render_template('index.html', **values)
+    return render_template('index.html')
 
 
 @socketio.on('connect')
