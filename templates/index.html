@@ -30,12 +30,11 @@
                      $(".case3").show();
                  }
                console.log('After connect', msg);
+               socket.emit('get new value','check');
            });
 
-           socket.on('update value', function(msg) {
-               console.log('Slider value updated');
-               $('#' + msg.who).val(msg.data);
-           });
+
+
          });
       </script>
        <style>
