@@ -2,7 +2,6 @@ from flask import Flask, render_template
 from flask_socketio import SocketIO, emit
 import serial
 import time
-import random
 
 app = Flask(__name__)
 socketio = SocketIO(app)
@@ -40,7 +39,8 @@ def get_new_value(msg):
     else:
         Ah1 = float(data2[position_Ah1 + 5:position_Ah1 + 11])
         Ah2 = float(data2[position_Ah2 + 5:position_Ah2 + 11])
-    emit('after connect', {'data': {'per1': 20, 'per2': 40, 'case': random.randint(1, 4)}}, broadcast=True)
+    emit('after connect', {'data': {'per1': 20, 'per2': 40, 'case': 3}}, broadcast=True)
+
 
 if __name__ == '__main__':
     socketio.run(app, host='0.0.0.0')
