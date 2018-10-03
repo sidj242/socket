@@ -13,6 +13,9 @@
                 $(".case1").hide();
                 $(".case2").hide();
                 $(".case3").hide();
+                for (i=1;i<=6;i++) {
+                    $(".rectangle_"+ i).hide();
+                }
             }
             hideAllCases();
            // sending a connect request to the server.
@@ -30,20 +33,63 @@
                      $(".case3").show();
                  }
                console.log('After connect', msg);
+               var tower_up = parseInt(msg.data.per1/16.66);
+               if (tower_up == 6) {
+                  tower_up = tower_up - 1;
+               }
+                for (i=1;i<=tower_up+1;i++) {
+                    $(".rectangle_"+ i).show();
+                    if (tower_up < 2) {
+                      $(".rectangle_"+ i).css("background-color", "red");
+                    } else if (tower_up == 2) {
+                        $(".rectangle_"+ i).css("background-color", "yellow");
+                    } else {
+                        $(".rectangle_"+ i).css("background-color", "green");
+                    }
+                }
+
+               console.log(tower_up);
                socket.emit('get new value','check');
            });
-
-
-
          });
       </script>
        <style>
         .rectangle {
-          height: 47px;
-          width: 9px;
-          background-color: green;
+          height: 41px;
+          width: 7px;
           block: inline;
         }
+        .rectangle_1 {
+           position: absolute;
+           top: 174px;
+           left: 319px;
+        }
+        .rectangle_2 {
+           position: absolute;
+           top: 174px;
+           left: 308px;
+        }
+        .rectangle_3 {
+           position: absolute;
+           top: 174px;
+           left: 297px;
+        }
+        .rectangle_4 {
+           position: absolute;
+           top: 174px;
+           left: 286px;
+        }
+        .rectangle_5 {
+           position: absolute;
+           top: 174px;
+           left: 275px;
+        }
+        .rectangle_6 {
+           position: absolute;
+           top: 174px;
+           left: 264px;
+        }
+
     </style>
    </head>
    <body style="background-image: url('../static/bg.png'); background-repeat:no-repeat;background-size:cover;">
@@ -53,21 +99,13 @@
        <div style="position: absolute; top: 260px; left: 235px;">
            <img src="../static/battery.png" style="width: 100px"/>
        </div>
-       <!--<div class="#silo_up" >-->
-           <!--<div class="rectangle"  style="position: absolute; top: 208px; left: 400px;"></div>-->
-           <!--<div class="rectangle"  style="position: absolute; top: 208px; left: 386px;"></div>-->
-           <!--<div class="rectangle"  style="position: absolute; top: 208px; left: 372px;"></div>-->
-           <!--<div class="rectangle"  style="position: absolute; top: 208px; left: 358px;"></div>-->
-           <!--<div class="rectangle"  style="position: absolute; top: 208px; left: 344px;"></div>-->
-           <!--<div class="rectangle"  style="position: absolute; top: 208px; left: 330px;"></div>-->
-       <!--</div>-->
-
-       <div class="#silo_down_red">-->
-           <!--<img src="../static/red.png" style="-->
-                <!--position: absolute;-->
-                <!--top: 309px;-->
-                <!--left: 401px;-->
-                <!--width: 9px;"/>-->
+       <div class="silo_up" >
+           <div class="rectangle rectangle_1" ></div>
+           <div class="rectangle rectangle_2" ></div>
+           <div class="rectangle rectangle_3" ></div>
+           <div class="rectangle rectangle_4" ></div>
+           <div class="rectangle rectangle_5" ></div>
+           <div class="rectangle rectangle_6" ></div>
        </div>
 
        <div class="case1">
